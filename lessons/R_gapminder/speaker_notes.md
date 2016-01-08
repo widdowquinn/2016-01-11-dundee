@@ -1,6 +1,6 @@
 # SPEAKER_NOTES.md - R
 
-Speaker Notes for the 2015-11-12 Software Carpentry R lesson
+Speaker Notes for the 2016-01-12 Software Carpentry R lesson
 
 **TYPE ALL EXAMPLES AS YOU GO. THIS KEEPS THE SPEED SANE, AND ALLOWS YOU TO EXPLAIN EVERY STEP.**
 
