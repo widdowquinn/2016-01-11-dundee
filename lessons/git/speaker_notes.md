@@ -962,3 +962,131 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 **SLIDE** (The conflicting changes)
 
 * Talk around the slide
+
+## Resolving a conflict
+
+**SLIDE** (Resolving a conflict)
+
+* Talk around slide
+
+* **Pull the remote changes**
+  * `git` tries to merge automatically, and will if it can
+  * If not, it marks the conflict in the affected file
+
+```
+lpritc@Totoro:planets$ git pull origin master
+remote: Counting objects: 3, done.
+remote: Compressing objects: 100% (1/1), done.
+remote: Total 3 (delta 2), reused 3 (delta 2), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/widdowquinn/planets
+ * branch            master     -> FETCH_HEAD
+   4907645..d83cb5a  master     -> origin/master
+Auto-merging mars.txt
+CONFLICT (content): Merge conflict in mars.txt
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+* **Explain conflict syntax**
+  * The local change in `HEAD` is preceded by `<<<<<<<`
+  * Then there's a separator
+  * Then the remote change, followed by `>>>>>>>`
+  * We have to decide which change to keep (if either)
+
+```
+lpritc@Totoro:planets$ cat mars.txt 
+Cold and dry. Everything a nice colour. Matt Damon.
+Two moons. This may be an issue for werewolves!
+Not much atmosphere, mind.
+A bit dusty. Bring a Hoover.
+<<<<<<< HEAD
+I wish Pluto was a planet, like this one.
+=======
+But at least it's a planet, unlike Pluto.
+>>>>>>> d83cb5a5ef115c4718a685121182c27a874143a8
+```
+
+* **Edit the file to resolve the change**
+  * Until you add/commit, `git status` will warn about "unmerged paths"
+
+```
+lpritc@Totoro:planets$ nano mars.txt 
+lpritc@Totoro:planets$ cat mars.txt
+Cold and dry. Everything a nice colour. Matt Damon.
+Two moons. This may be an issue for werewolves!
+Not much atmosphere, mind.
+A bit dusty. Bring a Hoover.
+But at least it's a planet, unlike Pluto. Which is definitely interesting.
+lpritc@Totoro:planets$ git status
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 1 different commit each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# You have unmerged paths.
+#   (fix conflicts and run "git commit")
+#
+# Unmerged paths:
+#   (use "git add <file>..." to mark resolution)
+#
+#	both modified:      mars.txt
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+* **Add and commit, then push**
+
+```
+lpritc@Totoro:planets$ git add mars.txt
+lpritc@Totoro:planets$ git commit -m "merged changes from GitHub"
+[master 665ed3f] merged changes from GitHub
+lpritc@Totoro:planets$ git status
+# On branch master
+# Your branch is ahead of 'origin/master' by 2 commits.
+#   (use "git push" to publish your local commits)
+#
+nothing to commit, working directory clean
+lpritc@Totoro:planets$ git push origin master
+Username for 'https://github.com': widdowquinn
+Password for 'https://widdowquinn@github.com': 
+Counting objects: 10, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 671 bytes | 0 bytes/s, done.
+Total 6 (delta 4), reused 0 (delta 0)
+To https://github.com/widdowquinn/planets.git
+   d83cb5a..665ed3f  master -> master
+``` 
+
+* **Change back to your host repo, and pull**
+  * Check with `git remote -v`
+  * The conflict is resolved
+
+```
+lpritc@Totoro:planets$ cd ~/planets/
+lpritc@Totoro:planets$ git remote -v
+origin	https://github.com/widdowquinn/planets.git (fetch)
+origin	https://github.com/widdowquinn/planets.git (push)
+lpritc@Totoro:planets$ git pull origin master
+remote: Counting objects: 6, done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 6 (delta 4), reused 6 (delta 4), pack-reused 0
+Unpacking objects: 100% (6/6), done.
+From https://github.com/widdowquinn/planets
+ * branch            master     -> FETCH_HEAD
+   d83cb5a..665ed3f  master     -> origin/master
+Updating d83cb5a..665ed3f
+Fast-forward
+ mars.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+lpritc@Totoro:planets$ cat mars.txt 
+Cold and dry. Everything a nice colour. Matt Damon.
+Two moons. This may be an issue for werewolves!
+Not much atmosphere, mind.
+A bit dusty. Bring a Hoover.
+But at least it's a planet, unlike Pluto. Which is definitely interesting.
+```
+
+## Wrapping up
+
+* Talk around slide

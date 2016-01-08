@@ -535,48 +535,26 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 
 ![The conflicting changes](img/conflict.svg)
 
+----
+
+### Resolving a conflict
+
+* `git` detects overlapping changes
+  * `git` defers to humans for how to resolve: **communicate**!
+  
+* To resolve:
+  * *pull* remote changes
+  * *merge* changes into our working copy
+  * *push* the merged changes
+  
+**Live Presentation**
+
 ---
 
-## Open Science
+## Wrapping up
 
-----
-
-### Personal example 1
-
-- Supplementary information from a paper published in 2014 on GitHub
-
-[https://github.com/widdowquinn/SI_Pritchard_Birch_2014](https://github.com/widdowquinn/SI_Pritchard_Birch_2014)
-
-----
-
-### Repository contents
-
-- Model description: `toy_plant_immune_system.cps`
-- Results files: `*.txt`
-- File to reproduce publication figures: `generate_graphs.Rmd`
-- Publication figures: `*.pdf`
-
-----
-
-### Personal examples 2 & 3
-
-- Supplementary info from a paper published in 2012
-
-[http://figshare.com/articles/An_RxLR_Effector…](http://figshare.com/articles/An_RxLR_Effector_from_Phytophthora_infestans_Prevents_Re_localisation_of_Two_Plant_NAC_Transcription_Factors_from_the_Endoplasmic_Reticulum_to_the_Nucleus/819229)
-
-
-- Dataset from a paper published in 2008
-
-[http://figshare.com/articles/_Microarray_Analysis…](http://figshare.com/articles/_Microarray_Analysis_of_Selected_P_atrosepticum_Genes_in_planta_/599101)
-
-----
-
-### Personal examples 4 & 5
-
-- Software libraries on GitHub
-
-[pyADHoRe](https://github.com/widdowquinn/pyADHoRe)
-
-[pyani](https://github.com/widdowquinn/pyani)
-
-
+* GitHub/version control can be an open electronic lab book
+  * Collect data - store in OA repository (Zenodo/FigShare)
+  * Use GitHub to store work in progress: analysis lab book
+  * Post preprint to (Bio)arXiv
+* Even if you don't work openly, it's more reproducible, and reproducible (and auditable)
