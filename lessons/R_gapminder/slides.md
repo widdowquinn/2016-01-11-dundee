@@ -428,6 +428,77 @@ xlist$a
 
 ---
 
+## Functions
+
+----
+
+### Learning objectives
+
+* To understand why we divide programs in to small, single-purpose functions
+* To understand how to define a function
+* To understand how to test a function (and why)
+
+----
+
+### What is a function
+
+* Gathers a sequence of operations into one action
+  * Preserves operations for future use
+  * Keeps them under a memorable, meaningful name (readability)
+  * Can be applied to several different inputs at different times (reproducibility)
+* Functions are the building-blocks of programming
+
+----
+
+### Defining a function in `R`
+
+**Live Presentation**
+
+```
+my_sum <- function(a, b) {
+  the_sum <- a + b
+  return(the_sum)
+}
+```
+
+----
+
+### Challenge 1
+
+(5min)
+
+* Can you write a function, called `kelvin_to_celsius`, that converts temperature from Kelvin to degrees Celsius?
+  * Put the function in the `functions-lesson.R` script and save it, then `source` the file.
+
+* Hint: 0K = -273.15C; 0C = 273.15K
+
+----
+
+### Challenge 2
+
+(5min)
+
+* Can you write a function, called `fahr_to_celsius`, that converts temperature from Fahrenheit to degrees Celsius?
+  * Put the function in the `functions-lesson.R` script and save it, then `source` the file.
+
+----
+
+### Testing functions
+
+* Testing functions to demonstrate that they work is critical
+* Test against known good and bad values
+* Tests can be automated (e.g. `testthat` package)
+
+**Live Presentation**
+
+```
+fahr_to_celsius(32)
+kelvin_to_celsius(-10)
+```
+
+
+---
+
 ## Data Frames
 
 ----
@@ -891,3 +962,197 @@ gapminder %>% group_by(continent)
 ```
 gapminder %>% mutate(gdp_billion=gdpPercap*pop/10^9)
 ```
+
+---
+
+## Creating publication-quality graphics
+
+----
+
+### Learning objectives
+
+* To be able to use `ggplot2` to generate publication-quality graphics
+* To understand the grammar of graphics
+
+----
+
+### The grammar of graphics
+
+* `ggplot2` is based on a "Grammar of Graphics"
+  * Separates data from representation
+  * Easy to iteratively update plots
+* It also produces very pretty graphics
+
+----
+
+### A basic scatterplot
+
+* `ggplot2` has convenience functions that can draw plots quickly
+
+**Live Presentation**
+
+```
+library(ggplot2)
+qplot(lifeExp, gdpPercap, data=gapminder, colour=continent)
+```
+
+----
+
+### What is a scatterplot? Aesthetics…
+
+* Each observation is a point
+* The point's *aesthetics* determine how it is rendered
+  * *x-* and *y-* co-ordinates
+  * size, shape, colour, etc.
+* Aesthetics can be:
+  * constant
+  * mapped to variables (e.g. *x-*,*y-* co-ordinates)
+* Many different plots can be generated from the same *data*, using different aesthetics
+
+----
+
+### What is a scatterplot? Aesthetics…
+
+* Aesthetics define data point representations as a dataset, e.g.
+
+![Example datapoint aesthetics](images/scatterplot_data_table.png)
+
+* This should remind you of a `data.table`…
+
+----
+
+### What is a scatterplot? `geom`s
+
+* If we draw the data with points: *scatterplot*
+* If we draw the data with lines: *line plot*
+* If we draw the data with bars: *bar chart*
+* Each of these "types" of representation is a `geom`
+
+![Types of `geom`](images/geom_types.png)
+
+----
+
+### `ggplot2` layers
+
+* `ggplot2` plots are built as *layers*
+* Each layer has at least two parts:
+  * data and aesthetic mapping
+  * geometric object (`geom`)
+  * (optional statistical transformation/adjustments)
+* Data can come from a default dataset in a `ggplot` object  
+
+----
+
+### Building a scatterplot
+
+**Live presentation**
+
+```
+p <- ggplot(data=gapminder, aes(x=lifeExp, y=gdpPercap))
+p + geom_point(aes(colour=continent))
+```
+
+----
+
+### Challenge 1
+
+(5min)
+
+Can you modify the example so that the figure visualises how life expectancy has changed over time as a scatterplot?
+
+----
+
+### Layers
+
+* A big advantage of `ggplot2` is that we can use several layers of `geom`s
+* We'll do this to better visualise the `gapminder` data
+
+**Live Presentation**
+
+```
+p + geom_line(aes(by=country))
+p + geom_line(aes(by=country)) + geom_point()
+```
+
+----
+
+### Transformations
+
+* Another type of layer is a *transformation* or `scale`
+* This controls mapping between data values and position on the plot
+  * e.g. axis scaling
+
+**Live presentation**
+
+```
+p <- ggplot(data=gapminder, aes(x=lifeExp, y=gdpPercap, colour=continent))
+p + geom_point() + scale_y_log10()
+```
+
+----
+
+### Statistics
+
+* Statistical analyses transform data
+  * Usually a data summary (e.g. smoothing)
+  * Also binning of data
+  
+**Live Presentation**
+
+```
+p <- ggplot(data=gapminder, aes(x=lifeExp, y=gdpPercap))
+p + geom_point() + scale_y_log10() + geom_smooth()
+p + geom_point() + scale_y_log10() + geom_density_2d()
+```
+
+----
+
+### Multi-panel figures
+
+* So far we've looked at all data in one plot
+* Multi-panel figures can give clearer comparisons
+  * *Facet*s
+  * "small multiples plots"
+  
+**Live Presentation**
+
+```
+p <- ggplot(data=gapminder, aes(x=year, y=lifeExp,
+            colour=continent, by=country))
+p + geom_line() + scale_y_log10() + facet_wrap(~country)
+```
+
+----
+
+### Challenge 2
+
+(10min)
+
+* Can you create a density plot of GDP per capita, with colour filled by continent?
+
+* Advanced: Transform the *x* axis to better visualise data spread, and use facets to panel density plots by year.
+
+---
+
+## Wrapping up
+
+----
+
+### Learning objectives
+
+* To review best practices for using `R` in scientific analyses
+
+----
+
+### Best practices
+
+* **Make code readable**
+* **Documentation: say *why* not *how***
+* **Keep code modular**
+  * Separate data from analysis
+  * Separate functions from analysis
+* **Break problems into chunks**
+* **Make sure code does the right thing**
+  * Test your code on known examples
+* **Don't repeat yourself**
+  * Use functions to avoid repeated code

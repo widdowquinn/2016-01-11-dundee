@@ -838,6 +838,118 @@ List of 2
  $ data_structures: chr [1:4] "vector" "matrix" "factor" "list"
 ```
 
+## Functions
+
+**SLIDE** (Functions)
+
+**SLIDE** (Learning objectives)
+
+* Talk around slide
+
+* **Why functions?**
+  * You've already seen the power of functions, for encapsulating complex analyses into simple commands
+  * Functions work similarly in `R` to in Python
+
+**SLIDE** (What is a function?)
+
+* Talk around slide
+
+### Defining a function
+
+**SLIDE** (Defining a function)
+
+* Talk around slide
+
+* **Create a new `R` script file to hold functions**
+  * `File -> New File -> R Script`
+  * `File -> Save -> functions-lesson.R`
+  * Check what's happened in Git tab 
+
+* **Write new function in script**
+  * Describe parts of function:
+  * *prototype* with inputs
+  * code block/body
+  * indentation (readability)
+  * addition, and return statements
+  * function scope, internal variables (readability)
+  * assignment of function to variable
+  * comments (readability)
+  
+
+```
+# Returns sum of two inputs
+my_sum <- function(a, b) {
+  the_sum <- a + b
+  return(the_sum)
+}
+# Converts fahrenheit to Kelvin
+fahr_to_kelvin <- function(temp) {
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  return(kelvin)
+}
+```
+
+* **Run the functions**
+  * `source` the script
+  * tab-completion works!
+  * boiling and freezing points
+
+```
+> fahr_to_kelvin(32)
+[1] 273.15
+> fahr_to_kelvin(212)
+[1] 373.15
+```
+
+**SLIDE** (Challenge 1)
+
+Solution:
+
+```
+kelvin_to_celsius <- function(temp) {
+  celsius <- temp - 273.15
+  return(celsius)
+}
+```
+
+**SLIDE** (Challenge 2)
+
+Solution:
+
+```
+fahr_to_celsius <- function(temp) {
+  kelvin <- fahr_to_kelvin(temp)
+  celsius <- kelvin_to_celsius(kelvin)
+  return(celsius)
+}
+```
+
+* **Commit to local Git repo**
+
+**SLIDE** (Testing functions)
+
+* Talk around slide
+
+* **Known good values**
+  * water freezes at 32F/0C, boils at 212F/100C
+  
+```
+> fahr_to_celsius(32)
+[1] 0
+> fahr_to_celsius(212)
+[1] 100
+```
+
+* **Known bad values**
+  * All values are fair game on Fahrenheit/Celsius, but can't go below 0K
+  
+```
+> kelvin_to_celsius(-10)
+[1] -283.15
+```
+
+* **We'd need to modify this for real use!**
+
 ## Data Frames
 
 **SLIDE** (Data Frames)
@@ -2057,3 +2169,260 @@ Groups: continent [1]
 5    Africa  1972       2339.616    3286.8539  7305376 10130833        17.091772
 6    Africa  1977       2585.939    4142.3987  8328097 11585184        21.535946
 ```
+
+## Creating publication-quality graphics
+
+**SLIDE** (Creating publication-quality graphics)
+
+**SLIDE** (Learning objectives)
+
+* Talk around slide
+
+### The grammar of graphics
+
+**SLIDE** (The grammar of graphics)
+
+* Talk around slide
+
+* **Grammar of graphics is non-intuitive, but gives advantages**
+  * Data and its representation handled separately
+  * Means that components can be customised to a particular representation easily
+
+**SLIDE** (A basic scatterplot)
+
+* Talk around slide
+
+```
+> library(ggplot2)
+> qplot(lifeExp, gdpPercap, data=gapminder, colour=continent)
+```
+
+* **Show the plot**
+  * Describe features
+  * x-, y-axes; colours by continent; legend
+  * main features - Europe high life expectancy, Africa low GDP per capita
+
+* **What is happening under the surface? How can you reproduce this?**
+  * Convenience functions can be quick and easy, but aren't readily modifiable
+  * We'd like to build plots *like* this in other situations - how can we do that?
+
+**SLIDE** (What is a scatterplot? Aesthetics…)
+
+* Talk around slide
+
+**SLIDE** (What is a scatterplot? Aesthetics…)
+
+* Talk around slide
+
+* **Aesthetics decide where and how data are plotted**
+  * They essentially create a new dataset that contains aesthetic information
+
+**SLIDE** (What is a scatterplot? `geom`s)
+
+* Talk around slide
+
+* **`geom`s determine the "type" of plot**
+  * Not all `geom`s make sense for a given dataset (though they may be 'grammatical')
+  * Can combine multiple `geom`s to produce new graphs
+  
+**SLIDE** (`ggplot2` layers)
+
+* Talk around slide
+
+**SLIDE** (Building a scatterplot)
+
+* **Creating a `ggplot` object**
+  * Can't plot these directly
+  * Can store them in variables for convenience/reproducibility
+
+```
+> ggplot(data=gapminder, aes(x=lifeExp, y=gdpPercap))
+> p <- ggplot(data=gapminder, aes(x=lifeExp, y=gdpPercap))
+> > str(p)
+List of 9
+ $ data       :'data.frame':	1704 obs. of  6 variables:
+  ..$ country  : Factor w/ 142 levels "Afghanistan",..: 1 1 1 1 1 1 1 1 1 1 ...
+  ..$ year     : int [1:1704] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 ...
+  ..$ pop      : num [1:1704] 8425333 9240934 10267083 11537966 13079460 ...
+  ..$ continent: Factor w/ 5 levels "Africa","Americas",..: 3 3 3 3 3 3 3 3 3 3 ...
+  ..$ lifeExp  : num [1:1704] 28.8 30.3 32 34 36.1 ...
+  ..$ gdpPercap: num [1:1704] 779 821 853 836 740 ...
+  […]
+```
+
+* **We need to add a layer**
+  * At minimum, use a `geom`
+  * This uses the default dataset we specified in `p`, unless told otherwise
+  * `geom_point` tells `ggplot2` we want to represent data as points (scatterplot)
+  * We get only a scatterplot of points, but no colours
+  
+```
+> p + geom_point()
+```
+
+* **We can modify aesthetics**
+  * In the default dataset, or in the `geom` layer
+  * Aesthetics/data in the `geom` layer override those in the default
+  
+```
+> p + geom_point(aes(colour=continent))
+> p <- ggplot(data=gapminder, aes(x=lifeExp, y=gdpPercap, colour=continent))
+> p + geom_point()
+```  
+
+**SLIDE** (Challenge 1)
+
+Solution:
+
+```
+> p <- ggplot(data=gapminder, aes(x=year, y=lifeExp, colour=continent))
+> p + geom_point()
+```
+
+This is not a good way to view the data - we need a new geometry!
+
+### Layers
+
+**SLIDE** (Layers)
+
+* Talk around slide
+
+* **The last challenge representation didn't look good**
+  * Change `geom` to line chart
+  
+```
+> p + geom_line()
+```
+
+* This looks wrong
+  * Lines connect continents, not countries (which is what we want)
+
+* **Group data on a variable**
+  * Use `by` to group data by country
+  
+```
+> p + geom_line(aes(by=country))
+```
+
+* That looks better
+
+* **Overlay a second `geom` to see datapoints**
+  * Use the `+` operator to keep adding `geom`s
+  * Layers are drawn in the specified order
+  
+```
+> p + geom_line(aes(by=country)) + geom_point()
+> p + geom_line(aes(by=country)) + geom_point(aes(colour=NULL))
+> p + geom_point(aes(colour=NULL)) + geom_line(aes(by=country))
+```
+
+### Transformations and statistics
+
+**SLIDE** (Transformations)
+
+* Talk around slide
+
+* **Scaling axes**
+  * Difficult to distinguish GDP on the y-axis
+  * Rescale with a transformation
+
+```
+> p <- ggplot(data=gapminder, aes(x=lifeExp, y=gdpPercap, colour=continent))
+> p + geom_point()
+> p + geom_point() + scale_y_log10()
+```
+
+* **Transformations can be layered**
+
+```
+> p + geom_point(aes(size=pop)) + scale_size("population")
+> p + geom_point(aes(size=pop)) + scale_size("population") + scale_y_log10()
+```
+
+* **Scaling colours**
+  * Transformations are also how colours are 'scaled'
+
+```
+> p + geom_point() + scale_y_log10() + scale_colour_brewer()
+> p + geom_point() + scale_y_log10() + scale_colour_grey()
+```
+
+**SLIDE** (Statistics)
+
+* Talk around slide
+
+* **Adding a smoother to the data**
+  * Adds as another layer on the plot
+
+```
+> p <- ggplot(data=gapminder, aes(x=lifeExp, y=gdpPercap))
+> p + geom_point()
+> p + geom_point() + scale_y_log10()
+> p + geom_point() + scale_y_log10() + geom_smooth()
+```
+
+* **Adding a KDE**
+  * Adds as another layer on the plot
+  
+```
+> p + geom_point() + scale_y_log10() + geom_density_2d()
+```
+
+### Multi-panel figures
+
+**SLIDE** (Multi-panel figures)
+
+* Talk around slide
+
+* **Faceting**
+  * Grouping data by country, colouring by continent
+  * One big plot is messy, hard to read.
+  * Using `facet_wrap` splits out plots on groups
+  
+```
+> p <- ggplot(data=gapminder, aes(x=year, y=lifeExp, colour=continent, by=country))
+> p + geom_line()
+> p + geom_line() + scale_y_log10()
+> p + geom_line() + scale_y_log10() + facet_wrap(~continent)
+```
+
+* **Grouping on country**
+  * Even the continent plots are a bit jumbled
+  * Group by country just by changing the argument
+  
+```
+> p + geom_line() + scale_y_log10() + facet_wrap(~country)
+```
+
+* Very hard to read in `RStudio`
+* Export graph as pdf and visualise
+  * Click `Export -> Save as PDF`
+  * PDF Size: A4
+  * Orientation: Landscape
+  * File name (something sensible)
+  * View plot after saving
+  * `Save`
+  
+**SLIDE** (Challenge 2)
+ 
+Solution:
+ 
+```
+> p <- ggplot(data = gapminder, aes(x = gdpPercap, fill=continent))
+> p + geom_density()
+> p + geom_density(alpha=0.6)
+> p + geom_density(alpha=0.6) + scale_x_log10()
+> p + geom_density(alpha=0.6) + scale_x_log10() + facet_wrap(~year)
+```
+  
+## Wrapping up
+
+**SLIDE** (Wrapping Up)
+
+**SLIDE** (Learning objectives)
+
+* Talk around slide
+
+**SLIDE** (Best practices)
+
+* Talk around slide
