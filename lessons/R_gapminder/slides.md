@@ -18,6 +18,12 @@ Please use the EtherPad to take communal notes:
 * Best practices for organising code
 * Best practices for reproducibility
 
+----
+
+### The real reason we're here?
+
+![PhD comic](images/phd031014s.gif)
+
 ---
 
 ## Introduction to `R` and `RStudio`
@@ -496,6 +502,13 @@ fahr_to_celsius(32)
 kelvin_to_celsius(-10)
 ```
 
+----
+
+### Not the best approach…
+
+![PhD comic](images/phd033114s.gif)
+
+…you always need negative examples
 
 ---
 
@@ -969,6 +982,14 @@ gapminder %>% mutate(gdp_billion=gdpPercap*pop/10^9)
 
 ----
 
+### Visualisation is key!
+
+![How scientists see data](images/how_scientists_see_data.jpg)
+
+It helps us interpret…
+
+----
+
 ### Learning objectives
 
 * To be able to use `ggplot2` to generate publication-quality graphics
@@ -1144,6 +1165,12 @@ p + geom_line() + scale_y_log10() + facet_wrap(~country)
 
 ----
 
+### My typical day
+
+![CommitStrip](images/Strip-Chez-le-Psy-3-650-finalenglish.jpg)
+
+----
+
 ### Best practices
 
 * **Make code readable**
@@ -1156,3 +1183,11 @@ p + geom_line() + scale_y_log10() + facet_wrap(~country)
   * Test your code on known examples
 * **Don't repeat yourself**
   * Use functions to avoid repeated code
+
+----
+
+### Don't be irreplacable…
+
+(there may be a more fun job round the corner…)
+
+![PhD comic](images/phd032013s.gif)

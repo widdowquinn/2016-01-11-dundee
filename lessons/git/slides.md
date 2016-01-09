@@ -12,6 +12,12 @@ Please use the EtherPad to take communal notes:
 
 ----
 
+### What lies ahead…
+
+![XKCD comic](img/git.png)
+
+----
+
 ### Learning objectives
 
 * Understand the basics of automated version control
@@ -202,6 +208,12 @@ git commit
 ### The modify-add-commit lifecycle
 
 ![modify-add-commit lifecycle](img/lifecycle.png)
+
+----
+
+### I predict the future…
+
+![XKCD comic](img/git_commit.png)
 
 ---
 
@@ -496,6 +508,12 @@ git pull origin master
 
 ----
 
+### Seriously, `git push` when done…
+
+![H&S infringement](img/git_fire_notice.jpg)
+
+----
+
 ### Let's make a conflict
 
 * As the *host*: add a line to `mars.txt`
@@ -558,3 +576,9 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.
   * Use GitHub to store work in progress: analysis lab book
   * Post preprint to (Bio)arXiv
 * Even if you don't work openly, it's more reproducible, and reproducible (and auditable)
+
+----
+
+### You're ready to leave this behind…
+
+![PhD comic](img/phd052810s.png)
