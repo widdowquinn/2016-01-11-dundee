@@ -79,7 +79,8 @@ lpritc@Totoro:~$ git config --global user.name "Leighton Pritchard"
 lpritc@Totoro:~$ git config --global user.email "leighton.pritchard@hutton.ac.uk"
 lpritc@Totoro:~$ git config --global color.ui "auto"
 lpritc@Totoro:~$ git config --global core.editor "nano -w"
-(git config --global core.editor "'C:\Program Files (x86)\Notepad++\notepad++.exe' -multiInst -notabbar -nosession -noPlugin")
+(git config --global core.editor "'C:\Program Files (x86)\Notepad++\notepad++.exe' \
+                                 -multiInst -notabbar -nosession -noPlugin")
 ```
 
 * **Check settings at any time**
