@@ -61,6 +61,12 @@ Please use the EtherPad to take communal notes:
 
 ----
 
+### What are the odds?
+
+![Dilbert cartoon](images/dt160107.gif)
+
+----
+
 ### Best practices
 
 * No single 'best' way - only good principles
