@@ -28,7 +28,7 @@ of the other options, or something completely different. A helper can advise you
 1. Click on the Windows button, select 'Documents' from the list on the right side of the popup to open a file explorer window.
 1. Click in the file explorer location bar and set the location to **_\\\\dundee\media\apps\Other\Git\GitforWindows\Installer_**
 1. Click `Install`. This will (after a short while) run a terminal window which takes some time to complete. It is a good job to do this as soon as you log in the first time.
-1. Click on the Windows button, then `All Programs` and `Update Shortcuts`. 
+1. Click on the Windows button, then `All Programs` and `Refresh Shortcuts`. 
 1. Follow the **Easy Route** above.
 
 
