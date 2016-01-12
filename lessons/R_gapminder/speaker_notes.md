@@ -924,6 +924,40 @@ fahr_to_celsius <- function(temp) {
 }
 ```
 
+**INSERTED EXAMPLE**
+
+* Just as in Python, we can use `for` loops to apply a function to several values
+* Avoids repetition
+
+```
+for (i in 32:100) {
+  print(fahr_to_celsius(i))
+}
+```
+
+* Can also apply functions to vectors
+
+```
+fahr_to_celsius(32:100)
+```
+
+* Also `if` and `if/else` statements, as in Python:
+
+```
+if (5 > 1) {
+  print("condition is true")
+}
+```
+
+```
+if (5 < 1) {
+  print("condition is true")
+} else {
+  print("condition is false")
+}
+```
+
+
 * **Commit to local Git repo**
 
 **SLIDE** (Testing functions)
