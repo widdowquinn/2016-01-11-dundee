@@ -244,7 +244,7 @@ Every piece of data in `R` is one of these:
 * logical: (`TRUE`, `FALSE`)
 * numeric:
   * integer (e.g. `2L`, `as.integer(3)`)
-  * double ('decimal' e.g. `-23.45`, 'pi', '3.0')
+  * double ('decimal' e.g. `-23.45`, `pi`, `3.0`)
 * complex: ('complex numbers' e.g. `3+0i`, `1+4i`)
 * character: ('text', e.g. `"a""`, `'SWC'`, `"This is not a string"`)
 * raw: (binary data)
@@ -431,9 +431,9 @@ xlist$a
 
 (5min)
 
-* Creata list of length two containing a character vector for each of the sections in this part of the workshop:
-  * Data types
-  * Data structures
+* Create a list of length two containing a character vector for each of the sections in this part of the workshop:
+  * `Data types`
+  * `Data structures`
 * Populate each character vector with the names of the data types and data structures we’ve seen so far.
 
 ![Red/green sticky](images/red_green_sticky.png)
@@ -446,7 +446,7 @@ xlist$a
 
 ### Learning objectives
 
-* To understand why we divide programs in to small, single-purpose functions
+* To understand why we divide programs into small, single-purpose functions
 * To understand how to define a function
 * To understand how to test a function (and why)
 
@@ -534,7 +534,7 @@ kelvin_to_celsius(-10)
 
 * The standard `R` structure for storing tabular, 'rectangular' data
 * A collection (`list`) of vectors of identical lengths
-  * each vector is a column
+  * each column is a vector
   * each vector can be a different data type
 * *a bit like a spreadsheet: rows and columns*
 
